@@ -1,0 +1,20 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Marriage Pact
+-------------
+
+Q1. It is your choice to use either an ordered or unordered set. In a few sentences, what are some of the tradeoffs between the two? Additionally, please give an example (that has not been shown in lecture) of a valid hash function that could be used to hash student names for an unordered set.
+A1. The main difference between an ordered set and a disordered set is that for the former ordering the elements by the computer takes extra computational processing time in contrast to a disordered set.
+A function could sum the ASCII value of each letter of the name, multiplying by a different prime number according to its position (e.g. first letter * 31^1, second * 31^2, etc.). This distributes the values better and considers the whole name.
+
+
+Q2. Note that we are saving pointers to names in the queue, not names themselves. Why might this be desired in this problem? What happens if the original set where the names are stored goes out of scope and the pointers are referenced?
+A2. 
+Memory efficiency: Avoid duplicating long strings.
+
+Consistency: If the original name is updated, all pointers will reflect the change.
+
+If the original set goes out of scope, the pointers in the queue are invalidated. Accessing them causes undefined behavior 
+
+The solution is to ensure that the original set remains in scope as long as the queue uses it, or copy the names if lifetime is not guaranteed.
