@@ -1,0 +1,41 @@
+Questions:
+
+• What is the output of this program?
+
+The output of this program is the following:
+v1 size: 0
+v2 size: 4
+v3 size: 4
+
+• Why does v1.size() return 0 after the move?
+Because move semantics transfer all elements of the vector to a new variable.
+This is different from a copy, which duplicates each element while maintaining the original state of v1.
+
+• What does std::move do?
+It transfers each element of v1 into v3. For that reason, in the final output,
+the size of v1 is zero, and the size of v3 is 4.
+
+• Why is v1 still in a valid but unspecified state?
+Because we cannot determine the exact state of v1 after moving all its elements.
+In this case, we can work with an empty vector, but for other types of data, after moving
+the elements, the functions that operate on the structure may become invalid. It is considered
+an unspecified state because we do not know the exact contents of v1.
+
+Questions
+• What did you learn about move semantics?
+I learned that move semantics are a powerful mechanism for optimizing resource management in C++. 
+They allow the transfer of ownership of resources (such as dynamically allocated memory) from one object to another without creating unnecessary copies. 
+This reduces overhead and improves runtime performance, especially in scenarios involving large data structures or computationally expensive operations.
+
+• In what kinds of projects do you think this would matter?
+Move semantics are particularly useful in projects that involve handling large amounts of data or resource-intensive operations. 
+For example, they are beneficial in applications that process large datasets, such as geographic information systems (GIS), 
+machine learning pipelines, or simulations, where data structures like vectors, maps, or matrices are frequently moved between functions or objects. 
+By avoiding redundant copies, move semantics can significantly improve performance and reduce memory usage.
+
+• What are some risks of using std::move incorrectly?
+The primary risk of using std::move incorrectly is leaving the source object in an invalid or undefined state. 
+After a move operation, the source object is left in a valid but unspecified state, 
+meaning it can still be used but its contents are no longer guaranteed. 
+If the programmer does not account for this and attempts to access or modify the moved-from object without reinitializing it, 
+it can lead to undefined behavior. Additionally, failing to properly handle resource cleanup in the moved-from object can result in memory leaks or dangling pointers.
